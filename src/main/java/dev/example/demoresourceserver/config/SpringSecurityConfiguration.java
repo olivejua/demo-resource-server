@@ -10,6 +10,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/hello").hasAuthority("SCOPE_access-hello")
+                .antMatchers("/hi").hasAuthority("SCOPE_access-hi")
                 .anyRequest().authenticated();
 
         http.oauth2ResourceServer().jwt();
